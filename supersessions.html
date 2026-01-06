@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School of Play | Super Sessions</title>
+    
+    <!-- Google Fonts Fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. FONT SETUP --- */
+        @font-face {
+            font-family: 'Kabouter DEMO';
+            src: url('fonts/Kabouter-DEMO.otf') format('opentype');
+            font-weight: normal; font-style: normal;
+        }
+        @font-face {
+            font-family: 'Gotham Rounded';
+            src: url('fonts/GothamRounded-Medium.otf') format('opentype');
+            font-weight: 600; font-style: normal;
+        }
+        @font-face {
+            font-family: 'Gotham Rounded';
+            src: url('fonts/GothamRounded-Light.otf') format('opentype');
+            font-weight: 300; font-style: normal;
+        }
+
+        /* --- 2. COLOR & VARIABLES (Updated from your Reference) --- */
+        :root {
+            --font-title: 'Kabouter DEMO', 'Chewy', cursive; 
+            --font-header: 'Gotham Rounded', 'Nunito', sans-serif;
+            --font-body: 'Gotham Rounded', 'Nunito', sans-serif;
+
+            /* Brand Colors */
+            --primary-blue: #0A2463; 
+            
+            /* Reference Image Palette */
+            --fun-pink: #ef476f;   /* The Pink Circle color */
+            --fun-cyan: #26c6da;   /* The Blue Square color */
+            --fun-yellow: #ffd100; /* The Yellow Rectangle color */
+            
+            --off-white: #f9fbfd;
+            --text-dark: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--text-dark);
+            background-color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevents scrollbar from floating shapes */
+        }
+
+        h1 { font-family: var(--font-title); font-weight: 400; letter-spacing: 1px; }
+        h2, h3, .btn, .nav-item { font-family: var(--font-header); font-weight: 600; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+        /* Button Style - Updated to Fun Pink */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            z-index: 5;
+        }
+
+        .btn-primary {
+            background-color: var(--fun-pink);
+            color: white;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* "Sticker" shadow effect */
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) rotate(-1deg);
+            background-color: #d63359;
+        }
+
+        /* --- DECORATIVE TEXT BACKGROUNDS (From Reference) --- */
+        /* The Yellow Rectangle */
+        .highlight-yellow {
+            background-color: var(--fun-yellow);
+            color: var(--primary-blue);
+            padding: 2px 15px;
+            display: inline-block;
+            transform: rotate(-1deg); /* Slight playful tilt */
+            border-radius: 4px;
+        }
+
+        /* The Cyan Square Style */
+        .highlight-cyan {
+            background-color: var(--fun-cyan);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: white;
+            padding: 15px 0;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 5px solid var(--fun-cyan); /* Blue zig zag line simulation */
+        }
+        
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo-area { font-family: var(--font-title); font-size: 2rem; color: var(--primary-blue); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            background: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+.nav-logo {
+    height: 60px; /* Adjust this number to make the logo bigger or smaller */
+    width: auto;  /* Keeps the logo proportions correct */
+    display: block;
+}
+        .hero-bg-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.3; z-index: 1;
+        }
+
+        .hero-content { position: relative; z-index: 3; max-width: 750px; }
+        
+        .hero h1 { 
+            font-size: 4rem; 
+            line-height: 1.2; 
+            margin-bottom: 25px; 
+            color: white;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+        
+        .hero p { font-size: 1.35rem; margin-bottom: 35px; opacity: 1; font-weight: 300; }
+
+        /* Decorative Element: ZIG ZAG SVG DIVIDER */
+        .zigzag-divider {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 4;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: scaleY(-1); /* Flip it so the wave is at the top of the next section */
+        }
+
+        /* --- DECORATIVE ICONS (SVG) --- */
+        .deco-icon { position: absolute; z-index: 2; pointer-events: none; }
+        
+        .sun-icon { top: 15%; right: 10%; width: 120px; animation: spin 20s linear infinite; }
+        .squiggle-icon { bottom: 20%; left: -50px; width: 150px; opacity: 0.6; }
+        .ball-icon { top: 50%; right: -30px; width: 80px; }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- PROGRAMME GRID --- */
+        .activities { padding: 100px 0; background-color: var(--off-white); position: relative; }
+        
+        /* Background decor for grid */
+        .grid-bg-decor {
+            position: absolute;
+            top: 50px; right: 50px;
+            font-size: 200px;
+            color: rgba(38, 198, 218, 0.1); /* Faint Cyan */
+            font-family: var(--font-title);
+            z-index: 1;
+        }
+
+        .section-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 2;}
+        .section-header h2 { font-size: 3rem; color: var(--primary-blue); margin-bottom: 15px; font-family: var(--font-title); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            position: relative; z-index: 2;
+        }
+
+        .card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 3px solid transparent; /* Prepare for hover border */
+        }
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--fun-yellow); 
+        }
+
+        .card-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        .card-content { padding: 25px; position: relative;}
+        .card h3 { color: var(--primary-blue); margin-bottom: 10px; font-size: 1.4rem; }
+        
+        /* TAG STYLES - Updated to Circles/Squares from Reference */
+        .tag {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            padding: 8px 15px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            font-family: var(--font-header);
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Alternating Tag Shapes */
+        .card:nth-child(odd) .tag {
+            background: var(--fun-pink);
+            color: white;
+            border-radius: 50px; /* The Pink Circle/Pill */
+        }
+
+        .card:nth-child(even) .tag {
+            background: var(--fun-cyan);
+            color: white;
+            border-radius: 8px; /* The Blue Square */
+            transform: rotate(3deg); /* Playful tilt */
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials { padding: 80px 0; background: var(--primary-blue); color: white; text-align: center; position: relative; overflow: hidden;}
+        
+        /* Decorative Squiggle in background */
+        .testimonials::before {
+            content: '';
+            position: absolute; top: -50px; left: -50px; width: 200px; height: 200px;
+            background: radial-gradient(circle, var(--fun-yellow) 20%, transparent 20%);
+            background-size: 30px 30px;
+            opacity: 0.1;
+        }
+
+        .quote-box { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            font-size: 1.6rem; 
+            font-family: var(--font-title); /* Use Playful font for quote */
+            line-height: 1.4;
+        }
+        .stars { color: var(--fun-yellow); font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* --- FOOTER --- */
+        footer { background: #05143a; color: #aaa; padding: 60px 0; text-align: center; border-top: 10px solid var(--fun-pink);}
+        footer h2 { color: white; margin-bottom: 15px; font-family: var(--font-title); font-size: 2.5rem;}
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .sun-icon { width: 80px; top: 5%; right: 5%; }
+            .hero-bg-img { opacity: 0.2; }
+            .nav-flex button { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <div class="container nav-flex">
+            <a href="#" class="logo-area">
+    <!-- Change 'logo.png' to your actual file name if different -->
+    <img src="images/image.png" alt="School of Play Logo" class="nav-logo">
+</a>
+            <a href="#" class="btn btn-primary">Book Now</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <!-- BACKGROUND IMAGE -->
+        <img src="images/hero.jpg" alt="Super Sessions Hero" class="hero-bg-img" onerror="this.style.backgroundColor='#0A2463'">
+        
+        <!-- DECORATIVE SVG: SUN (Yellow) -->
+        <svg class="deco-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="20" fill="#FFD700" />
+            <g stroke="#FFD700" stroke-width="5" stroke-linecap="round">
+                <line x1="50" y1="15" x2="50" y2="5" />
+                <line x1="50" y1="85" x2="50" y2="95" />
+                <line x1="15" y1="50" x2="5" y2="50" />
+                <line x1="85" y1="50" x2="95" y2="50" />
+                <line x1="25" y1="25" x2="18" y2="18" />
+                <line x1="75" y1="75" x2="82" y2="82" />
+                <line x1="75" y1="25" x2="82" y2="18" />
+                <line x1="25" y1="75" x2="18" y2="82" />
+            </g>
+        </svg>
+
+        <!-- DECORATIVE SVG: BLUE SQUIGGLE -->
+        <svg class="deco-icon squiggle-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+            <path d="M10,25 Q30,5 50,25 T90,25 T130,25 T170,25" fill="none" stroke="#26c6da" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+
+        <div class="container">
+            <div class="hero-content">
+                <!-- Using the Yellow Block style for the title -->
+                <h1>Level Up Your Holidays<br><span class="highlight-yellow">Super Sessions!</span></h1>
+                <p>Laser Tag, Glow Dodgeball, RC Racing & more. The ultimate holiday camp experience is finally here.</p>
+                <a href="#" class="btn btn-primary">Find Your Session</a>
+                <p style="margin-top:20px; font-size: 0.9rem; font-weight: 600;">⭐ Limited spaces available</p>
+            </div>
+        </div>
+
+        <!-- The White Wave at bottom -->
+        <div class="zigzag-divider"></div>
+    </section>
+
+    <!-- ACTIVITIES GRID -->
+    <section class="activities">
+        <!-- Floating Ball Icon background -->
+        <svg class="deco-icon ball-icon" style="top: 100px; left: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="20" fill="#ef476f" opacity="0.6"/>
+            <path d="M10,25 Q25,10 40,25" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+        </svg>
+
+        <div class="container">
+            <div class="section-header">
+                <h2>New Thrills. <span class="highlight-cyan">New Skills.</span></h2>
+                <p>Check out the new lineup of activities designed to get kids moving.</p>
+            </div>
+
+            <div class="grid">
+                
+                <!-- Card 1 -->
+                <article class="card">
+                    <img src="images/laser-tag.jpg" alt="Laser Tag" class="card-img" onerror="this.src='https://placehold.co/600x400?text=Image+Missing'">
+                    <div class="card-content">
+                        <!-- Pink Circle Tag -->
+                        <span class="tag">High Energy</span>
+                        <h3>Laser Tag Arenas</h3>
+                        <p>Strategy meets stealth. Our safe, adrenaline-pumping laser tag sessions encourage teamwork.</p>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="card">
+                    <img src="images/glow-dodgeball.jpg" alt="Glow Dodgeball" class="card-img" onerror="this.src='https://placehold.co/600x400?text=Image+Missing'">
+                    <div class="card-content">
+                        <!-- Cyan Square Tag -->
+                        <span class="tag">Most Popular</span>
+                        <h3>Glow Dodgeball</h3>
+                        <p>Dodgeball like never before. We turn the lights down and the UV lights up.</p>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="card">
+                    <img src="images/rc-racing.jpg" alt="RC Racing" class="card-img" onerror="this.src='https://placehold.co/600x400?text=Image+Missing'">
+                    <div class="card-content">
+                        <span class="tag">Skill Building</span>
+                        <h3>RC Racing</h3>
+                        <p>Master the track! Kids learn precision and coordination racing our high-speed RC cars.</p>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="card">
+                    <img src="images/pickleball.jpg" alt="Pickleball" class="card-img" onerror="this.src='https://placehold.co/600x400?text=Image+Missing'">
+                    <div class="card-content">
+                        <span class="tag">New Sport</span>
+                        <h3>Pickleball</h3>
+                        <p>The world’s fastest-growing sport has arrived. It's fast-paced, easy to learn, and fun.</p>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="card">
+                    <img src="images/lacrosse.jpg" alt="Lacrosse" class="card-img" onerror="this.src='https://placehold.co/600x400?text=Image+Missing'">
+                    <div class="card-content">
+                        <span class="tag">Team Sport</span>
+                        <h3>Lacrosse</h3>
+                        <p>A fantastic way to improve hand-eye coordination in a non-contact environment.</p>
+                    </div>
+                </article>
+
+                 <!-- Card 6 -->
+                 <article class="card">
+                    <img src="images/mini-golf.jpg" alt="Mini Golf" class="card-img" onerror="this.src='https://placehold.co/600x400?text=Image+Missing'">
+                    <div class="card-content">
+                        <span class="tag">Focus</span>
+                        <h3>Mini-Golf</h3>
+                        <p>Patience and precision. Our mini-golf course challenges campers to focus.</p>
+                    </div>
+                </article>
+
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="#" class="btn btn-primary">View Full Schedule</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="stars">★★★★★</div>
+            <div class="quote-box">
+                <span style="font-size: 3rem; line-height: 0; color:var(--fun-yellow)">“</span>
+                My son hasn't stopped talking about the Glow Dodgeball! Finally, a camp that burns off all his energy.
+                <span style="font-size: 3rem; line-height: 0; color:var(--fun-yellow)">”</span>
+            </div>
+            <p style="margin-top: 20px; font-weight: bold; font-family:var(--font-header);">— Sarah J., Parent</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h2>Ready to join the fun?</h2>
+            <p style="margin-bottom: 25px;">Spaces fill up fast during school holidays.</p>
+            <a href="#" class="btn btn-primary">Book A Super Session Now</a>
+            <br><br>
+            <p style="font-size: 0.8rem;">&copy; 2023 School of Play. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
